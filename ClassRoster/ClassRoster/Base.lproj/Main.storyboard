@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Gjs-2O-Yow">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Gjs-2O-Yow">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
     </dependencies>
@@ -13,7 +13,7 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -22,20 +22,21 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="txT-uW-Cyg">
                                 <rect key="frame" x="-23" y="-15" width="133" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Browse People...">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Browse People..."/>
                                 <connections>
-                                    <action selector="changePage:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="qKm-8W-42G"/>
-                                    <segue destination="j4Z-Mh-iTd" kind="show" id="d2M-1U-G7V"/>
+                                    <segue destination="j4Z-Mh-iTd" kind="push" id="d2M-1U-G7V"/>
                                 </connections>
                             </button>
+                            <connections>
+                                <action selector="browsePeople:" destination="vXZ-lx-hvc" id="0xq-uD-9f1"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1117" y="380"/>
+            <point key="canvasLocation" x="595.73333333333335" y="359.73333333333335"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="L4F-Wd-cw3">
@@ -46,25 +47,15 @@
                         <viewControllerLayoutGuide type="bottom" id="hJn-F0-rwU"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Due-vj-iMy">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="test" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zpd-ZZ-ciZ">
-                                <rect key="frame" x="265" y="285" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerY" secondItem="zpd-ZZ-ciZ" secondAttribute="centerY" id="QLb-Oo-vC4"/>
-                            <constraint firstAttribute="centerX" secondItem="zpd-ZZ-ciZ" secondAttribute="centerX" constant="-13.5" id="sor-PR-hcK"/>
-                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="8Kc-Ye-vrU"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hga-ru-tcT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1807" y="380"/>
+            <point key="canvasLocation" x="963.73333333333335" y="359.73333333333335"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ef0-yy-Hv5">
@@ -82,7 +73,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tzc-Yv-vvg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="185" y="-313"/>
+            <point key="canvasLocation" x="98.666666666666671" y="-296.30666666666667"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4">
+            <size key="portraitSize" width="320" height="568"/>
+            <size key="landscapeSize" width="568" height="320"/>
+        </simulatedScreenMetrics>
+    </simulatedMetricsContainer>
 </document>

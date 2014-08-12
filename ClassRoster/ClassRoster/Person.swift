@@ -11,8 +11,8 @@ import UIKit
 
 class Person {
     
-    var firstName = String()
-    var lastName  = String()
+    var firstName : String
+    var lastName  : String
     var image     : UIImage?
     
     init (firstName :String, lastName :String) {

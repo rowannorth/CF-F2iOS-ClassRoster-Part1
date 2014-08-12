@@ -11,33 +11,43 @@ import UIKit
 class ViewController: UIViewController {
     
     
-   
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view, typically from a nib.
+       
+        var studentRoster = [Person]()
+        var studentFirstNames    = ["Nate", "Matthew", "Jeff", "Chrstie", "David", "Adrian", "Jake", "Shams", "Cameron", "Kori", "Parker", "Nathan", "Casey", "Brendan", "Brian", "Mark", "Rowan", "Kevin", "Will", "Heather", "Tuan", "Zack", "Sara", "Hongyao"]
+        var studentLastNames     = ["Birkholz", "Brightbill", "Chavez", "Ferderer", "Fry", "Gherle", "Hawken", "Kazi", "Klein", "Kolodziejczak", "Lewis", "Ma", "MacPhee", "McAleer", "Mendez", "Morris", "North", "Pham", "Richman", "Thueringer", "Vu", "Walkingstick", "Wong", "Zhang"]
+        
+        func buildRosterArray(first : [String], last : [String]) -> [Person] {
+            
+            var rosterPairs = [Person]()
+            
+            for var i = 0; i < first.count; i++ {
+                
+                rosterPairs.append(Person(firstName: (first[i]), lastName: (last[i])))
+                
+            }
+            
+            return(rosterPairs)
+            
+        }
         
         
+        studentRoster = buildRosterArray(studentFirstNames, studentLastNames)
         
-        var rowan = Person(firstName: "Rowan", lastName: "North")
-        var sara = Person(firstName: "Sara", lastName: "Wong")
+        for (var i = 0; i < studentRoster.count; i++) {
+            
+            println(studentRoster[i].fullName())
+            
+        }
         
-        var firstNames = ["Kori", "Rowan"]
-        
-        var rosterList = [rowan, sara]
-        
-        //var Ko
-        
-        
-        
-        println(rowan.fullName())
-        
-        println(rosterList[0].firstName + " " + rosterList[0].lastName)
+        println(studentRoster[0].fullName())
         
     }
 
-    
-    
+
     
     
     override func didReceiveMemoryWarning() {
@@ -47,5 +57,6 @@ class ViewController: UIViewController {
     
     
 
-}
 
+
+}
