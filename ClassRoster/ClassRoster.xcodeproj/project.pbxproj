@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58216968199B212B00B74133 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58216967199B212B00B74133 /* DetailViewController.swift */; };
 		582284FF1996EBD00010897A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582284FE1996EBD00010897A /* AppDelegate.swift */; };
 		582285021996EBD00010897A /* ClassRoster.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 582285001996EBD00010897A /* ClassRoster.xcdatamodeld */; };
 		582285041996EBD00010897A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582285031996EBD00010897A /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		58216967199B212B00B74133 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		582284F91996EBD00010897A /* ClassRoster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClassRoster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		582284FD1996EBD00010897A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		582284FE1996EBD00010897A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				582284FE1996EBD00010897A /* AppDelegate.swift */,
 				582285031996EBD00010897A /* ViewController.swift */,
 				582285051996EBD00010897A /* Main.storyboard */,
+				58216967199B212B00B74133 /* DetailViewController.swift */,
 				582285081996EBD00010897A /* Images.xcassets */,
 				582285001996EBD00010897A /* ClassRoster.xcdatamodeld */,
 				582284FC1996EBD00010897A /* Supporting Files */,
@@ -216,6 +219,7 @@
 			files = (
 				582285041996EBD00010897A /* ViewController.swift in Sources */,
 				582284FF1996EBD00010897A /* AppDelegate.swift in Sources */,
+				58216968199B212B00B74133 /* DetailViewController.swift in Sources */,
 				58F604921996EFBE00264224 /* Person.swift in Sources */,
 				582285021996EBD00010897A /* ClassRoster.xcdatamodeld in Sources */,
 			);

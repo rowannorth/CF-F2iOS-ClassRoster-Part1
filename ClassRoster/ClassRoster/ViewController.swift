@@ -8,47 +8,85 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     
-
+    @IBOutlet weak var tableView: UITableView!
+    
+    var people = [Person]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
-        var studentRoster = [Person]()
-        var studentFirstNames    = ["Nate", "Matthew", "Jeff", "Chrstie", "David", "Adrian", "Jake", "Shams", "Cameron", "Kori", "Parker", "Nathan", "Casey", "Brendan", "Brian", "Mark", "Rowan", "Kevin", "Will", "Heather", "Tuan", "Zack", "Sara", "Hongyao"]
-        var studentLastNames     = ["Birkholz", "Brightbill", "Chavez", "Ferderer", "Fry", "Gherle", "Hawken", "Kazi", "Klein", "Kolodziejczak", "Lewis", "Ma", "MacPhee", "McAleer", "Mendez", "Morris", "North", "Pham", "Richman", "Thueringer", "Vu", "Walkingstick", "Wong", "Zhang"]
-        
-        func buildRosterArray(first : [String], last : [String]) -> [Person] {
-            
-            var rosterPairs = [Person]()
-            
-            for var i = 0; i < first.count; i++ {
-                
-                rosterPairs.append(Person(firstName: (first[i]), lastName: (last[i])))
-                
-            }
-            
-            return(rosterPairs)
-            
-        }
-        
-        
-        studentRoster = buildRosterArray(studentFirstNames, studentLastNames)
-        
-        for (var i = 0; i < studentRoster.count; i++) {
-            
-            println(studentRoster[i].fullName())
-            
-        }
-        
-        println(studentRoster[0].fullName())
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.createPeople()
         
     }
-
-
     
+    func createPeople() {
+        
+        var nate = Person(firstName: "Nate", lastName: "Birkholz")
+        var matthew = Person(firstName: "Matthew", lastName: "Brightbill")
+        var jeff = Person(firstName: "Jeff", lastName: "Chavez")
+        var chrstie = Person(firstName: "Chrstie", lastName: "Ferderer")
+        var david = Person(firstName: "David", lastName: "Fry")
+        var adrian = Person(firstName: "Adrian", lastName: "Gherle")
+        var jake = Person(firstName: "Jake", lastName: "Hawken")
+        var shams = Person(firstName: "Shams", lastName: "Kazi")
+        var cameron = Person(firstName: "Cameron", lastName: "Klein")
+        var kori = Person(firstName: "Kori", lastName: "Kolodziejczak")
+        var parker = Person(firstName: "Parker", lastName: "Lewis")
+        var nathan = Person(firstName: "Nathan", lastName: "Ma")
+        var casey = Person(firstName: "Casey", lastName: "MacPhee")
+        var brendan = Person(firstName: "Brendan", lastName: "Mendez")
+        var brian = Person(firstName: "Brian", lastName: "Mendez")
+        var mark = Person(firstName: "Mark", lastName: "Morris")
+        var rowan = Person(firstName: "Rowan", lastName: "North")
+        var kevin = Person(firstName: "Kevin", lastName: "Pham")
+        var will = Person(firstName: "Will", lastName: "Richman")
+        var heather = Person(firstName: "Heather", lastName: "Thueringer")
+        var tuan = Person(firstName: "Tuan", lastName: "Vu")
+        var zack = Person(firstName: "Zack", lastName: "Walkingstick")
+        var sara = Person(firstName: "Sara", lastName: "Wong")
+        var hongyao = Person(firstName: "Hongyao", lastName: "Zhang")
+        
+        var peopleList = [nate, matthew, jeff, chrstie, david, adrian, jake, shams, cameron, kori, parker, nathan, casey, brendan, brian, mark, rowan, kevin, will, heather, tuan, zack, sara, hongyao]
+   
+        self.people = peopleList
+        
+    }
+    
+    
+    func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+        
+        return 1
+    }
+    
+    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+        
+        return self.people.count
+    }
+    
+    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        
+        var personForRow = self.people[indexPath.row]
+        
+        cell.textLabel.text = personForRow.fullName()
+        
+        cell.backgroundColor = UIColor.cyanColor()
+    
+        return cell
+        
+    }
+    
+    func tableView(tableView: UITableView!, didDeselectRowAtIndexPath indexPath: NSIndexPath!) {
+        
+        println(indexPath.section)
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -56,7 +94,15 @@ class ViewController: UIViewController {
     }
     
     
+    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
+    
+    if segue.identifier == "showDetails" {
+    let destination = segue.destinationViewController as DetailViewController
+    destination.people2 = people[tableView.indexPathForSelectedRow().row]
+    
+    
+    }
 
-
+    }
 
 }
