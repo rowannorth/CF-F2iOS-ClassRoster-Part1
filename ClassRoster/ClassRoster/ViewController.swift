@@ -82,7 +82,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         cell.textLabel.text = personForRow.fullName()
         
-        cell.backgroundColor = UIColor.cyanColor()
+        cell.backgroundColor = UIColor.grayColor()
     
         return cell
     }
