@@ -10,6 +10,7 @@ import UIKit
 
 class DetailViewController: UIViewController, UITextFieldDelegate {
 
+    var people: Person!
     
     @IBOutlet weak var textField: UITextField!
     
