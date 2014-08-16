@@ -35,7 +35,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var nate = Person(firstName: "Nate", lastName: "Birkholz")
         var matthew = Person(firstName: "Matthew", lastName: "Brightbill")
         var jeff = Person(firstName: "Jeff", lastName: "Chavez")
-        var chrstie = Person(firstName: "Chrstie", lastName: "Ferderer")
+        var christie = Person(firstName: "Christie", lastName: "Ferderer")
         var david = Person(firstName: "David", lastName: "Fry")
         var adrian = Person(firstName: "Adrian", lastName: "Gherle")
         var jake = Person(firstName: "Jake", lastName: "Hawken")
@@ -57,7 +57,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var sara = Person(firstName: "Sara", lastName: "Wong")
         var hongyao = Person(firstName: "Hongyao", lastName: "Zhang")
         
-        var peopleList = [nate, matthew, jeff, chrstie, david, adrian, jake, shams, cameron, kori, parker, nathan, casey, brendan, brian, mark, rowan, kevin, will, heather, tuan, zack, sara, hongyao]
+        var peopleList = [nate, matthew, jeff, christie, david, adrian, jake, shams, cameron, kori, parker, nathan, casey, brendan, brian, mark, rowan, kevin, will, heather, tuan, zack, sara, hongyao]
    
         self.people = peopleList
         
@@ -87,9 +87,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
+    
+    //MARK: UITableViewDelegate
+    
     func tableView(tableView: UITableView!, didDeselectRowAtIndexPath indexPath: NSIndexPath!) {
         
-        println(indexPath.section)
+        println(indexPath.item)
         
     }
     
