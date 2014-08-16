@@ -105,8 +105,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
     
     if segue.identifier == "showDetails" {
-    let destination = segue.destinationViewController as DetailViewController
-    destination.people2 = people[tableView.indexPathForSelectedRow().row]
+        
+    var destination = segue.destinationViewController as DetailViewController
+        
+    destination.people = people[tableView.indexPathForSelectedRow().row]
     
     
     }
