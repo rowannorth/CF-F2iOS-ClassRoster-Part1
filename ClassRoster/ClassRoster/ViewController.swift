@@ -66,7 +66,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
         
-        return 1
+        return 2
     }
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
