@@ -24,6 +24,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        
+        tableView.reloadData()
+        
+    }
+    
     func createPeople() {
         
         var nate = Person(firstName: "Nate", lastName: "Birkholz")
@@ -79,7 +85,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.backgroundColor = UIColor.cyanColor()
     
         return cell
-        
     }
     
     func tableView(tableView: UITableView!, didDeselectRowAtIndexPath indexPath: NSIndexPath!) {

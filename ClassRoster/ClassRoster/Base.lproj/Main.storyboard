@@ -60,6 +60,10 @@
                                 <rect key="frame" x="20" y="95" width="280" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="fullNameTextField:" destination="j4Z-Mh-iTd" eventType="valueChanged" id="Pep-TW-UDS"/>
+                                    <outlet property="delegate" destination="j4Z-Mh-iTd" id="9MV-5C-vB1"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

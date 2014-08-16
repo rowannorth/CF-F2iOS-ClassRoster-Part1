@@ -13,11 +13,12 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var textField: UITextField!
     
-    var people2: Person!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.textField.text = self.people.fullName()
        
     }
     
@@ -27,7 +28,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         
         
         
-       textField.text = people2.fullName()
+       
         
     }
     
