@@ -19,20 +19,22 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.textField.text = self.people.fullName()
        
     }
     
     override func viewWillAppear(animated: Bool) {
         
+        self.firstNameTextField.text = self.people.firstName
+        self.lastNameTextField.text = self.people.lastName
         
     }
 
     
     override func viewWillDisappear(animated: Bool) {
         
-        self.people.fullName() = self.textField.text
+        self.people.firstName = self.firstNameTextField.text
+        self.people.lastName = self.lastNameTextField.text
+        
     }
     
     override func didReceiveMemoryWarning() {
