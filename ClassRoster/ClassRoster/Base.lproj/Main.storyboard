@@ -57,12 +57,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sye-uR-Nnk">
-                                <rect key="frame" x="20" y="95" width="280" height="30"/>
+                                <rect key="frame" x="140" y="95" width="160" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="fullNameTextField:" destination="j4Z-Mh-iTd" eventType="valueChanged" id="Pep-TW-UDS"/>
                                     <outlet property="delegate" destination="j4Z-Mh-iTd" id="9MV-5C-vB1"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bv1-zn-Y2U">
+                                <rect key="frame" x="140" y="133" width="160" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="j4Z-Mh-iTd" id="JCz-Xj-e8m"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -70,7 +77,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="8Kc-Ye-vrU"/>
                     <connections>
-                        <outlet property="textField" destination="Sye-uR-Nnk" id="NUC-gN-fGM"/>
+                        <outlet property="firstNameTextField" destination="Sye-uR-Nnk" id="Dnw-Oq-vNk"/>
+                        <outlet property="lastNameTextField" destination="bv1-zn-Y2U" id="d6S-61-ESf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hga-ru-tcT" userLabel="First Responder" sceneMemberID="firstResponder"/>

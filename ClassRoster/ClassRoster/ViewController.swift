@@ -26,7 +26,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewWillAppear(animated: Bool) {
         
-        tableView.reloadData()
+        self.tableView.reloadData()
         
     }
     

@@ -12,8 +12,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
 
     var people: Person!
     
-    @IBOutlet weak var textField: UITextField!
-    
+    @IBOutlet weak var firstNameTextField: UITextField!
+   
+    @IBOutlet weak var lastNameTextField: UITextField!
     
     
     override func viewDidLoad() {
@@ -23,14 +24,15 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
        
     }
     
-   
+    override func viewWillAppear(animated: Bool) {
+        
+        
+    }
 
-    override func viewDidAppear(animated: Bool) {
+    
+    override func viewWillDisappear(animated: Bool) {
         
-        
-        
-       
-        
+        self.people.fullName() = self.textField.text
     }
     
     override func didReceiveMemoryWarning() {
