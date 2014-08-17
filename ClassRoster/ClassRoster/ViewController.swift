@@ -45,7 +45,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var parker = Person(firstName: "Parker", lastName: "Lewis")
         var nathan = Person(firstName: "Nathan", lastName: "Ma")
         var casey = Person(firstName: "Casey", lastName: "MacPhee")
-        var brendan = Person(firstName: "Brendan", lastName: "Mendez")
+        var brendan = Person(firstName: "Brendan", lastName: "McAleer")
         var brian = Person(firstName: "Brian", lastName: "Mendez")
         var mark = Person(firstName: "Mark", lastName: "Morris")
         var rowan = Person(firstName: "Rowan", lastName: "North")
