@@ -13,14 +13,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var tableView: UITableView!
     
-    var people = [Person]()
+    var students = [Person]()
+    var teachers = [Person]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.createPeople()
+        self.createStudents()
+        self.createTeachers()
         
     }
     
@@ -30,7 +32,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    func createPeople() {
+    func createStudents() {
         
         var nate = Person(firstName: "Nate", lastName: "Birkholz")
         var matthew = Person(firstName: "Matthew", lastName: "Brightbill")
@@ -57,10 +59,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var sara = Person(firstName: "Sara", lastName: "Wong")
         var hongyao = Person(firstName: "Hongyao", lastName: "Zhang")
         
-        var peopleList = [nate, matthew, jeff, christie, david, adrian, jake, shams, cameron, kori, parker, nathan, casey, brendan, brian, mark, rowan, kevin, will, heather, tuan, zack, sara, hongyao]
-   
-        self.people = peopleList
+        var studentList = [nate, matthew, jeff, christie, david, adrian, jake, shams, cameron, kori, parker, nathan, casey, brendan, brian, mark, rowan, kevin, will, heather, tuan, zack, sara, hongyao]
         
+        self.students = studentList
+        
+    }
+    
+    func createTeachers() {
+        
+        var john = Person(firstName: "John", lastName: "Clem")
+        var brad = Person(firstName: "Brad", lastName: "Johnson")
+        var lindy = Person(firstName: "Lindy", lastName: "Codefellow")
+        
+        self.teachers.append(john)
+        self.teachers.append(brad)
+        self.teachers.append(lindy)
     }
     
     

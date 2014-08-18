@@ -9,8 +9,9 @@
 import UIKit
 
 class DetailViewController: UIViewController, UITextFieldDelegate {
-
-    var people: Person!
+    
+    var students: Person!
+    var teachers: Person!
     
     @IBOutlet weak var firstNameTextField: UITextField!
     
@@ -24,16 +25,28 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(animated: Bool) {
         
-        self.firstNameTextField.text = self.people.firstName
-        self.lastNameTextField.text = self.people.lastName
+        
+        //students
+        self.firstNameTextField.text = self.students.firstName
+        self.lastNameTextField.text = self.students.lastName
+        
+        //teachers
+        self.firstNameTextField.text = self.teachers.firstName
+        self.lastNameTextField.text = self.teachers.lastName
         
     }
     
     
     override func viewWillDisappear(animated: Bool) {
         
-        self.people.firstName = self.firstNameTextField.text
-        self.people.lastName = self.lastNameTextField.text
+        
+        //students
+        self.students.firstName = self.firstNameTextField.text
+        self.students.lastName = self.lastNameTextField.text
+        
+        //teachers
+        self.teachers.firstName = self.firstNameTextField.text
+        self.teachers.lastName = self.lastNameTextField.text
         
     }
     
