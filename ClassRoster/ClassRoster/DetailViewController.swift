@@ -13,13 +13,13 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     var people: Person!
     
     @IBOutlet weak var firstNameTextField: UITextField!
-   
+    
     @IBOutlet weak var lastNameTextField: UITextField!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -28,7 +28,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         self.lastNameTextField.text = self.people.lastName
         
     }
-
+    
     
     override func viewWillDisappear(animated: Bool) {
         
@@ -42,15 +42,15 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
-
+    
 }

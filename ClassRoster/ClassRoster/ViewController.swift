@@ -83,7 +83,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.textLabel.text = personForRow.fullName()
         
         cell.backgroundColor = UIColor.grayColor()
-    
+        
         return cell
     }
     
@@ -111,8 +111,4 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     destination.people = people[tableView.indexPathForSelectedRow().row]
     
     
-    }
-
-    }
-
 }
