@@ -27,7 +27,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="j4Z-Mh-iTd" kind="push" identifier="showDetails" id="eEt-oE-BJI"/>
+                                            <segue destination="j4Z-Mh-iTd" kind="push" identifier="showStudents" id="M51-VB-GOD"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
