@@ -84,7 +84,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         
-        return self.people.count
+        if section == 0 {
+            return self.students.count
+        } else {
+            return self.teachers.count
+        }
     }
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
