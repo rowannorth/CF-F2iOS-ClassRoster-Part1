@@ -95,11 +95,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
         
-        var personForRow = self.people[indexPath.row]
+        if indexPath.section == 0 {
         
-        cell.textLabel.text = personForRow.fullName()
+            var studentForRow = self.students[indexPath.row]
+            
+            cell.textLabel.text = studentForRow.fullName()
+            
+        } else {
         
-        cell.backgroundColor = UIColor.grayColor()
+            var teacherForRow = self.teachers[indexPath.row]
+            
+            cell.textLabel.text = teacherForRow.fullName()
+    
+        }
+        
+        cell.backgroundColor = UIColor.lightGrayColor()
         
         return cell
     }
