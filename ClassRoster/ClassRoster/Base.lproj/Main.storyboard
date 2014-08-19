@@ -27,10 +27,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="j4Z-Mh-iTd" kind="push" identifier="showStudents" id="M51-VB-GOD"/>
+                                            <segue destination="j4Z-Mh-iTd" kind="push" identifier="showPeople" id="M51-VB-GOD"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="WUA-dU-tYu"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="N6R-Wy-ZeH"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

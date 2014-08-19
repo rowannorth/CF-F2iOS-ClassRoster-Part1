@@ -36,7 +36,6 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    
     override func viewWillDisappear(animated: Bool) {
         
         

@@ -103,9 +103,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
         
         if section == 0 {
+            
             return "Students"
+            
         } else {
+            
             return "Teachers"
+            
         }
     }
     
