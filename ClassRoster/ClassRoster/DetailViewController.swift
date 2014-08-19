@@ -24,27 +24,15 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(animated: Bool) {
         
-        
-        //students
-        self.firstNameTextField.text = self.students.firstName
-        self.lastNameTextField.text = self.students.lastName
-        
-        //teachers
-        self.firstNameTextField.text = self.teachers.firstName
-        self.lastNameTextField.text = self.teachers.lastName
+        self.firstNameTextField.text = self.peopleDestination?.firstName
+        self.lastNameTextField.text = self.peopleDestination?.lastName
         
     }
     
     override func viewWillDisappear(animated: Bool) {
         
-        
-        //students
-        self.students.firstName = self.firstNameTextField.text
-        self.students.lastName = self.lastNameTextField.text
-        
-        //teachers
-        self.teachers.firstName = self.firstNameTextField.text
-        self.teachers.lastName = self.lastNameTextField.text
+        self.peopleDestination!.firstName = self.firstNameTextField.text
+        self.peopleDestination!.lastName = self.lastNameTextField.text
         
     }
     
