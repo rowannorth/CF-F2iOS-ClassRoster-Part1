@@ -69,11 +69,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         var john = Person(firstName: "John", lastName: "Clem")
         var brad = Person(firstName: "Brad", lastName: "Johnson")
-        var lindy = Person(firstName: "Lindy", lastName: "Codefellow")
-        
+
         self.teachers.append(john)
         self.teachers.append(brad)
-        self.teachers.append(lindy)
+        
     }
     
     
