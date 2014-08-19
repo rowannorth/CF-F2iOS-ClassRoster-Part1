@@ -10,9 +10,8 @@ import UIKit
 
 class DetailViewController: UIViewController, UITextFieldDelegate {
     
-    var students: Person!
-    var teachers: Person!
-    
+    var peopleDestination: Person?
+   
     @IBOutlet weak var firstNameTextField: UITextField!
     
     @IBOutlet weak var lastNameTextField: UITextField!
