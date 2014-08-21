@@ -61,39 +61,55 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sye-uR-Nnk">
-                                <rect key="frame" x="180" y="95" width="120" height="30"/>
+                                <rect key="frame" x="91" y="299" width="138" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <outlet property="delegate" destination="j4Z-Mh-iTd" id="9MV-5C-vB1"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bv1-zn-Y2U">
-                                <rect key="frame" x="180" y="133" width="120" height="30"/>
+                                <rect key="frame" x="91" y="332" width="138" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <outlet property="delegate" destination="j4Z-Mh-iTd" id="JCz-Xj-e8m"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="First" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YBh-1u-EfZ">
-                                <rect key="frame" x="138" y="98" width="34" height="21"/>
+                                <rect key="frame" x="49" y="303" width="34" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MxU-lK-zlp">
-                                <rect key="frame" x="138" y="137" width="33" height="21"/>
+                                <rect key="frame" x="49" y="336" width="33" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="empty-contact-icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="eup-op-jPb">
+                                <rect key="frame" x="40" y="103" width="240" height="128"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
+                                </accessibility>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kw0-mv-AfO">
+                                <rect key="frame" x="113" y="239" width="95" height="30"/>
+                                <state key="normal" title="Upload Photo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="uploadPhotoButton:" destination="j4Z-Mh-iTd" eventType="touchUpInside" id="ahG-Ni-KrX"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="8Kc-Ye-vrU"/>
                     <connections>
                         <outlet property="firstNameTextField" destination="Sye-uR-Nnk" id="Dnw-Oq-vNk"/>
+                        <outlet property="imageView" destination="eup-op-jPb" id="Z3r-6j-R79"/>
                         <outlet property="lastNameTextField" destination="bv1-zn-Y2U" id="d6S-61-ESf"/>
                     </connections>
                 </viewController>
@@ -120,6 +136,9 @@
             <point key="canvasLocation" x="98.666666666666671" y="-296.30666666666667"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="empty-contact-icon.png" width="256" height="256"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
