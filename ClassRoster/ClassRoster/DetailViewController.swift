@@ -79,7 +79,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
    
     @IBAction func uploadPhotoButton(sender: AnyObject) {
         
-        var imagePickerController = UIImagePickerController()
+        let imagePickerController = UIImagePickerController()
         
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
@@ -92,14 +92,15 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]!) {
         
-        picker.dismissViewControllerAnimated(true, completion: nil)
-        
         println("User picked an image")
         
         var editedImage = info[UIImagePickerControllerOriginalImage] as UIImage
         
         self.imageView.image = editedImage
         self.peopleDestination!.image = editedImage
+        
+        picker.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController!) {
