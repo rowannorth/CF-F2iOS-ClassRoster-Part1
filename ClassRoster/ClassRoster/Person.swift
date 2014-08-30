@@ -9,11 +9,13 @@
 import Foundation
 import UIKit
 
-class Person {
+class Person: NSObject, NSCoding {
     
-    var firstName : String
-    var lastName  : String
-    var image     : UIImage?
+    var firstName      = String()
+    var lastName       = String()
+    var image          : UIImage?
+    var gitHubUserName : String?
+   
     
     init (firstName :String, lastName :String) {
         
@@ -25,6 +27,35 @@ class Person {
     func fullName() -> String {
         
         return firstName + " " + lastName
+        
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        
+                aCoder.encodeObject(self.firstName, forKey: "firstName")
+                aCoder.encodeObject(self.lastName, forKey: "lastName")
+        if self.image != nil {
+            
+            aCoder.encodeObject(self.image!, forKey: "image")
+        }
+        if self.gitHubUserName != nil {
+            aCoder.encodeObject(self.gitHubUserName!, forKey: "gitHubUserName")
+        }
+        
+            
+        
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init()
+        self.firstName      = aDecoder.decodeObjectForKey("firstName") as String
+        self.lastName       = aDecoder.decodeObjectForKey("lastName") as String
+        if let myImage = aDecoder.decodeObjectForKey("image") as? UIImage {
+            self.image = myImage
+        }
+        if let myGitHubName = aDecoder.decodeObjectForKey("gitHubUserName") as? String{
+            self.gitHubUserName = myGitHubName
+        }
         
     }
     

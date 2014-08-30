@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol AddPersonDelegate {
+    func addNewPerson(newPerson: Person, image: UIImage?)
+}
+
 class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var peopleDestination: Person?
-    
+//    var defaultImageIcon = UIImage(named: "defaultIcon")
     var firstLoad = true
+    
+    var delegate : AddPersonDelegate?
    
     @IBOutlet weak var imageView: UIImageView!
     
@@ -27,7 +33,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         self.firstNameTextField.delegate = self
         self.lastNameTextField.delegate = self
         
-        if self.peopleDestination!.image != nil {
+        if self.peopleDestination?.image != nil {
             
             self.imageView.image = self.peopleDestination!.image
             
@@ -36,6 +42,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             self.imageView!.image == UIImage (named: "empty-contact-icon")
             
         }
+        
+      
         
     }
     
@@ -48,8 +56,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     override func viewWillDisappear(animated: Bool) {
         
-        self.peopleDestination!.firstName = self.firstNameTextField.text
-        self.peopleDestination!.lastName = self.lastNameTextField.text
+        self.peopleDestination?.firstName = self.firstNameTextField.text
+        self.peopleDestination?.lastName = self.lastNameTextField.text
         
         if self.firstLoad == true {
             
@@ -57,6 +65,9 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             
         }
         
+        if self.peopleDestination == nil {
+            self.delegate?.addNewPerson(Person(firstName: firstNameTextField.text, lastName: lastNameTextField.text), image: self.imageView.image?)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,11 +95,13 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         imagePickerController.delegate = self
         imagePickerController.allowsEditing = true
         
-        imagePickerController.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        imagePickerController.sourceType = UIImagePickerControllerSourceType.SavedPhotosAlbum
         
         self.presentViewController(imagePickerController, animated: true, completion: nil)
         
     }
+    
+    
     
     func imagePickerController(picker: UIImagePickerController!, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]!) {
         
@@ -97,7 +110,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         var editedImage = info[UIImagePickerControllerOriginalImage] as UIImage
         
         self.imageView.image = editedImage
-        self.peopleDestination!.image = editedImage
+        self.peopleDestination?.image = editedImage
         
         picker.dismissViewControllerAnimated(true, completion: nil)
         
@@ -108,6 +121,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         picker.dismissViewControllerAnimated(true, completion: nil)
         
     }
+    
     
     
     /*

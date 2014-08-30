@@ -8,27 +8,55 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddPersonDelegate {
     
     
     @IBOutlet weak var tableView: UITableView!
     
     var students = [Person]()
     var teachers = [Person]()
+    let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.createStudents()
-        self.createTeachers()
+        self.tableView.delegate   = self
+        
+        if let students = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/studentarchive") as? [Person] {
+            
+            self.students = students
+            
+        } else {
+            
+            self.createStudents()
+            
+        }
+        
+        if let teachers = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/teacherarchive") as? [Person] {
+            
+            self.teachers = teachers
+            
+        } else {
+            
+            self.createTeachers()
+            
+        }
         
     }
     
+    func addNewPerson(newPerson: Person, image: UIImage?) {
+        
+        self.students.append(newPerson)
+    }
+    
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         self.tableView.reloadData()
+        NSKeyedArchiver.archiveRootObject(students, toFile: documentsPath + "/studentarchive")
+        NSKeyedArchiver.archiveRootObject(teachers, toFile: documentsPath + "/teacherarchive")
         
     }
     
@@ -108,7 +136,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
         }
         
-        cell.backgroundColor = UIColor.lightGrayColor()
+        cell.backgroundColor = UIColor.whiteColor()
         
         return cell
     }
@@ -163,7 +191,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
             
-        } 
+        } else if segue.identifier == "addPerson" {
+            
+            
+            
+            let addVC = segue.destinationViewController as DetailViewController
+        
+            addVC.delegate = self
+            
+        } else {}
         
     }
     

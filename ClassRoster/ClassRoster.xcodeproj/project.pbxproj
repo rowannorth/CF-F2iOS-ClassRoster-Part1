@@ -15,6 +15,7 @@
 		582285091996EBD00010897A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 582285081996EBD00010897A /* Images.xcassets */; };
 		582285151996EBD00010897A /* ClassRosterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582285141996EBD00010897A /* ClassRosterTests.swift */; };
 		5846099619A58BF00005D989 /* empty-contact-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5846099519A58BF00005D989 /* empty-contact-icon.png */; };
+		58F322D619AEE3E200C78C7E /* AddPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F322D519AEE3E200C78C7E /* AddPersonViewController.swift */; };
 		58F604921996EFBE00264224 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F604911996EFBE00264224 /* Person.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +42,7 @@
 		582285131996EBD00010897A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		582285141996EBD00010897A /* ClassRosterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRosterTests.swift; sourceTree = "<group>"; };
 		5846099519A58BF00005D989 /* empty-contact-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "empty-contact-icon.png"; path = "../../../../../Pictures/empty-contact-icon.png"; sourceTree = "<group>"; };
+		58F322D519AEE3E200C78C7E /* AddPersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPersonViewController.swift; sourceTree = "<group>"; };
 		58F604911996EFBE00264224 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 				582284FE1996EBD00010897A /* AppDelegate.swift */,
 				582285031996EBD00010897A /* ViewController.swift */,
 				582285051996EBD00010897A /* Main.storyboard */,
+				58F322D519AEE3E200C78C7E /* AddPersonViewController.swift */,
 				58216967199B212B00B74133 /* DetailViewController.swift */,
 				5846099519A58BF00005D989 /* empty-contact-icon.png */,
 				582285081996EBD00010897A /* Images.xcassets */,
@@ -170,6 +173,7 @@
 				TargetAttributes = {
 					582284F81996EBD00010897A = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = CTEE5VF3BG;
 					};
 					5822850D1996EBD00010897A = {
 						CreatedOnToolsVersion = 6.0;
@@ -226,6 +230,7 @@
 				58216968199B212B00B74133 /* DetailViewController.swift in Sources */,
 				58F604921996EFBE00264224 /* Person.swift in Sources */,
 				582285021996EBD00010897A /* ClassRoster.xcdatamodeld in Sources */,
+				58F322D619AEE3E200C78C7E /* AddPersonViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
