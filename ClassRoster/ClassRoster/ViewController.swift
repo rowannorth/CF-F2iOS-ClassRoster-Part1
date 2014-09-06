@@ -8,8 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddPersonDelegate {
-    
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddPersonDelegate, DetailViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -17,9 +16,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var teachers = [Person]()
     let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
     
+    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         self.tableView.dataSource = self
         self.tableView.delegate   = self
@@ -46,18 +48,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    func addNewPerson(newPerson: Person, image: UIImage?) {
+    func addNewPerson(newPerson: Person) {
         
+       
         self.students.append(newPerson)
+//        self.teachers.append(newPerson)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         self.tableView.reloadData()
+        self.saveChanges()
+        
+    }
+    
+    func saveChanges() {
         NSKeyedArchiver.archiveRootObject(students, toFile: documentsPath + "/studentarchive")
         NSKeyedArchiver.archiveRootObject(teachers, toFile: documentsPath + "/teacherarchive")
-        
     }
     
     func createStudents() {
@@ -140,6 +149,34 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         return cell
     }
+    
+    func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
+        return true
+
+    }
+    
+    
+    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+        
+        if editingStyle == .Delete {
+
+            if indexPath.section == 0 {
+                self.students.removeAtIndex(indexPath!.row)
+                self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+
+            } else {
+                self.teachers.removeAtIndex(indexPath!.row)
+                self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+
+            }
+     
+        }
+
+        self.tableView.reloadData()
+        self.saveChanges()
+    }
+        
+    
     
     func tableView(tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
         

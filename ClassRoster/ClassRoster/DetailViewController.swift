@@ -9,22 +9,28 @@
 import UIKit
 
 protocol AddPersonDelegate {
-    func addNewPerson(newPerson: Person, image: UIImage?)
+    func addNewPerson(newPerson: Person)
+}
+protocol DetailViewControllerDelegate {
+    func saveChanges()
 }
 
 class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var peopleDestination: Person?
-//    var defaultImageIcon = UIImage(named: "defaultIcon")
     var firstLoad = true
+    var delegate: AddPersonDelegate!
+    var saveData: DetailViewControllerDelegate?
+
+//    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+
     
-    var delegate : AddPersonDelegate?
-   
     @IBOutlet weak var imageView: UIImageView!
-    
     @IBOutlet weak var firstNameTextField: UITextField!
-    
     @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak var gitHubTextField: UITextField!
+    @IBOutlet weak var gitHubUserImage: UIImageView!
+    @IBOutlet weak var gitHubActivityIndicator: UIActivityIndicatorView!
     
     
     override func viewDidLoad() {
@@ -32,6 +38,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
         self.firstNameTextField.delegate = self
         self.lastNameTextField.delegate = self
+        self.gitHubTextField.delegate = self
+        
         
         if self.peopleDestination?.image != nil {
             
@@ -39,10 +47,17 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             
         } else {
             
-            self.imageView!.image == UIImage (named: "empty-contact-icon")
+            self.imageView!.image = UIImage (named: "empty-contact-icon")
             
         }
-        
+       
+        //Setting image to be rounded
+        self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        self.imageView.layer.cornerRadius = self.imageView.frame.size.width / 2
+        self.imageView.clipsToBounds = true
+        self.imageView.layer.masksToBounds = true
+        self.imageView.layer.borderWidth = 1.0
+        self.imageView.layer.borderColor = UIColor.blackColor().CGColor
       
         
     }
@@ -51,13 +66,18 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
         self.firstNameTextField.text = self.peopleDestination?.firstName
         self.lastNameTextField.text = self.peopleDestination?.lastName
+        self.gitHubTextField.text = self.peopleDestination?.gitHubUserName
+        self.gitHubUserImage.image = self.peopleDestination?.gitHubProfileImage
+
         
     }
     
     override func viewWillDisappear(animated: Bool) {
         
-        self.peopleDestination?.firstName = self.firstNameTextField.text
-        self.peopleDestination?.lastName = self.lastNameTextField.text
+        self.peopleDestination?.firstName          = self.firstNameTextField.text
+        self.peopleDestination?.lastName           = self.lastNameTextField.text
+        self.peopleDestination?.gitHubUserName     = self.gitHubTextField.text
+        self.peopleDestination?.gitHubProfileImage = self.gitHubUserImage.image
         
         if self.firstLoad == true {
             
@@ -66,8 +86,17 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         }
         
         if self.peopleDestination == nil {
-            self.delegate?.addNewPerson(Person(firstName: firstNameTextField.text, lastName: lastNameTextField.text), image: self.imageView.image?)
+
+            var addingPerson = Person(firstName: firstNameTextField.text, lastName: lastNameTextField.text)
+            self.delegate.addNewPerson(addingPerson)
         }
+        
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.saveData?.saveChanges()
     }
     
     override func didReceiveMemoryWarning() {
@@ -84,7 +113,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     
     override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!) {
         
-        self.view .endEditing(true)
+        self.view.endEditing(true)
     }
     
    
@@ -123,6 +152,65 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     }
     
     
+    @IBAction func gitHubButton(sender: AnyObject) {
+        
+        var alertTextField = UITextField()
+        var enterGitHubInfo = UIAlertController(title: "Grab Info", message: "What is the person's GitHub username?", preferredStyle: UIAlertControllerStyle.Alert)
+        enterGitHubInfo.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+            textField.placeholder = "Username"
+            alertTextField = textField
+        })
+        enterGitHubInfo.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+        enterGitHubInfo.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+            self.gitHubTextField.text = alertTextField.text
+            self.peopleDestination?.gitHubUserName = alertTextField.text
+            self.getGitHubProfileImage(alertTextField.text)
+            })
+        self.presentViewController(enterGitHubInfo, animated: true, completion: nil)
+    }
+    
+    var imageDownloadQueue = NSOperationQueue()
+
+    func getGitHubProfileImage(searchUserName: String) -> Void {
+
+        self.gitHubActivityIndicator.startAnimating()
+        let gitHubURL = NSURL (string: "https://api.github.com/users/\(searchUserName)")
+        var profileImageURL = NSURL()
+        self.imageDownloadQueue.addOperationWithBlock { () -> Void in
+            let session = NSURLSession.sharedSession()
+            let task = session.dataTaskWithURL(gitHubURL, completionHandler: { (data, response, error) -> Void in
+                if error != nil {
+                    println("error 1")
+                }
+                var err: NSError?
+                var jsonResult = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &err) as NSDictionary
+                if err != nil {
+                    println("error 2")
+                }
+                if let avatarURL = jsonResult["avatar_url"] as? String {
+                    profileImageURL = NSURL(string: avatarURL)
+                }
+                var profileImageData = NSData(contentsOfURL: profileImageURL)
+                var profileImagePhoto = UIImage (data: profileImageData)
+                NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                    self.gitHubUserImage.image = profileImagePhoto
+                    self.peopleDestination?.gitHubProfileImage = profileImagePhoto
+                    self.gitHubActivityIndicator.stopAnimating()
+                    if self.gitHubUserImage.image == nil {
+                        self.gitHubUserImage.image = UIImage(named: "gitHubDefaultImage")
+                        self.gitHubTextField.text = nil
+                        var alert = UIAlertView()
+                        alert.title = "Invalid Username"
+                        alert.message = "Please enter a valid GitHub Username"
+                        alert.addButtonWithTitle("OK")
+                        alert.show()
+                    }
+                })
+            })
+            task.resume()
+        }
+
+    }
     
     /*
     // MARK: - Navigation

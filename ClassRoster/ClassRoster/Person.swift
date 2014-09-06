@@ -11,10 +11,11 @@ import UIKit
 
 class Person: NSObject, NSCoding {
     
-    var firstName      = String()
-    var lastName       = String()
-    var image          : UIImage?
-    var gitHubUserName : String?
+    var firstName          = String()
+    var lastName           = String()
+    var image              : UIImage?
+    var gitHubUserName     : String?
+    var gitHubProfileImage : UIImage?
    
     
     init (firstName :String, lastName :String) {
@@ -41,22 +42,26 @@ class Person: NSObject, NSCoding {
         if self.gitHubUserName != nil {
             aCoder.encodeObject(self.gitHubUserName!, forKey: "gitHubUserName")
         }
-        
+        if self.gitHubProfileImage != nil {
+            aCoder.encodeObject(self.gitHubProfileImage!, forKey: "gitHubPic")
+        }
             
         
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init()
-        self.firstName      = aDecoder.decodeObjectForKey("firstName") as String
-        self.lastName       = aDecoder.decodeObjectForKey("lastName") as String
+        self.firstName = aDecoder.decodeObjectForKey("firstName") as String
+        self.lastName  = aDecoder.decodeObjectForKey("lastName") as String
         if let myImage = aDecoder.decodeObjectForKey("image") as? UIImage {
             self.image = myImage
         }
-        if let myGitHubName = aDecoder.decodeObjectForKey("gitHubUserName") as? String{
+        if let myGitHubName = aDecoder.decodeObjectForKey("gitHubUserName") as? String {
             self.gitHubUserName = myGitHubName
         }
-        
+        if let myGitHubProfileImage = aDecoder.decodeObjectForKey("gitHubPic") as? UIImage {
+            self.gitHubProfileImage = myGitHubProfileImage
+        }
     }
     
 }

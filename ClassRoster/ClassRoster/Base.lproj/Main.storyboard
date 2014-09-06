@@ -5,39 +5,6 @@
         <capability name="Constraints with attributes relative to the layout margin" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Add Person View Controller-->
-        <scene sceneID="TSF-Mx-NCM">
-            <objects>
-                <viewController id="jy3-jl-RxW" userLabel="Add Person View Controller" customClass="AddPersonViewController" customModule="ClassRoster" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jfo-xB-65s"/>
-                        <viewControllerLayoutGuide type="bottom" id="auj-pC-sog"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="W5m-Qi-XJU">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xgv-L4-GSI">
-                                <rect key="frame" x="277" y="285" width="46" height="30"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="dismissAddVC:" destination="jy3-jl-RxW" eventType="touchUpInside" id="hOg-Wh-SFr"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="xgv-L4-GSI" firstAttribute="centerY" secondItem="W5m-Qi-XJU" secondAttribute="centerY" id="GSj-wr-hef"/>
-                            <constraint firstItem="xgv-L4-GSI" firstAttribute="centerX" secondItem="jfo-xB-65s" secondAttribute="centerX" id="YiU-oz-xRa"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3Rz-jT-IbW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1101" y="1085"/>
-        </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -126,118 +93,119 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty-contact-icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="eup-op-jPb">
-                                <rect key="frame" x="180" y="139" width="240" height="128"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
-                                </accessibility>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="128" id="8Kb-Yx-xpz"/>
-                                    <constraint firstAttribute="width" constant="240" id="LiO-ld-gPF"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kw0-mv-AfO">
-                                <rect key="frame" x="253" y="275" width="95" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kw0-mv-AfO">
+                                <rect key="frame" x="252" y="295" width="95" height="30"/>
                                 <state key="normal" title="Upload Photo">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="153" y="275" width="95" height="30"/>
+                                </variation>
                                 <connections>
                                     <action selector="uploadPhotoButton:" destination="j4Z-Mh-iTd" eventType="touchUpInside" id="ahG-Ni-KrX"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sye-uR-Nnk">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sye-uR-Nnk">
                                 <rect key="frame" x="231" y="340" width="138" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="8Gh-v7-vgd"/>
-                                    <constraint firstAttribute="width" constant="138" id="8aw-Cq-GvX"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="131" y="349" width="138" height="30"/>
+                                </variation>
                                 <connections>
                                     <outlet property="delegate" destination="j4Z-Mh-iTd" id="9MV-5C-vB1"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="First" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YBh-1u-EfZ">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" fixedFrame="YES" text="First" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YBh-1u-EfZ">
                                 <rect key="frame" x="189" y="344" width="34" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="34" id="7mU-eu-Phu"/>
-                                    <constraint firstAttribute="height" constant="21" id="hil-zV-QMg"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="110" y="349" width="34" height="21"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="90" y="352" width="34" height="21"/>
                                 </variation>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bv1-zn-Y2U">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bv1-zn-Y2U">
                                 <rect key="frame" x="231" y="375" width="138" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="138" id="KpZ-sr-IW1"/>
-                                    <constraint firstAttribute="height" constant="30" id="wA9-lX-SAI"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="152" y="380" width="138" height="30"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="131" y="385" width="138" height="124"/>
                                 </variation>
                                 <connections>
                                     <outlet property="delegate" destination="j4Z-Mh-iTd" id="JCz-Xj-e8m"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MxU-lK-zlp">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Last" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MxU-lK-zlp">
                                 <rect key="frame" x="189" y="379" width="33" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="90" y="388" width="33" height="21"/>
+                                </variation>
+                            </label>
+                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty-contact-icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="eup-op-jPb">
+                                <rect key="frame" x="225" y="139" width="150" height="150"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" button="YES" image="YES"/>
+                                </accessibility>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="XmE-T2-Wyi"/>
-                                    <constraint firstAttribute="width" constant="33" id="xh6-BQ-DW2"/>
+                                    <constraint firstAttribute="width" constant="150" id="XwT-CR-W1D"/>
+                                    <constraint firstAttribute="height" constant="150" id="uEp-Wf-hDC"/>
                                 </constraints>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="225" y="139" width="256" height="256"/>
+                                </variation>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mM7-Tv-9dj">
+                                <rect key="frame" x="231" y="426" width="138" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GitHub" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMk-0d-aSV">
+                                <rect key="frame" x="112" y="429" width="55" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCd-NM-o7n">
+                                <rect key="frame" x="175" y="417" width="48" height="48"/>
+                                <state key="normal" image="gitHubDefaultImage.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="gitHubButton:" destination="j4Z-Mh-iTd" eventType="touchUpInside" id="ts2-Mr-p5q"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="gitHubDefaultImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="L1m-Ym-iUv">
+                                <rect key="frame" x="175" y="417" width="48" height="48"/>
+                            </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2CV-RI-ZwQ">
+                                <rect key="frame" x="189" y="430" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="Sye-uR-Nnk" secondAttribute="centerX" id="31b-zg-RXQ">
-                                <variation key="heightClass=compact" constant="-100"/>
-                            </constraint>
-                            <constraint firstItem="Sye-uR-Nnk" firstAttribute="leading" secondItem="YBh-1u-EfZ" secondAttribute="trailing" constant="8" id="D99-RX-mZc"/>
-                            <constraint firstItem="Sye-uR-Nnk" firstAttribute="top" secondItem="Kw0-mv-AfO" secondAttribute="bottom" constant="35" id="GXn-3p-xfS"/>
-                            <constraint firstItem="Kw0-mv-AfO" firstAttribute="top" secondItem="eup-op-jPb" secondAttribute="bottom" constant="8" id="HWa-Sy-Bdc"/>
-                            <constraint firstItem="eup-op-jPb" firstAttribute="top" secondItem="y2B-sp-g6f" secondAttribute="bottom" constant="75" id="S7n-DN-1K9"/>
-                            <constraint firstAttribute="centerX" secondItem="bv1-zn-Y2U" secondAttribute="centerX" id="WPy-T8-o8b"/>
-                            <constraint firstItem="bv1-zn-Y2U" firstAttribute="leading" secondItem="MxU-lK-zlp" secondAttribute="trailing" constant="9" id="fVE-iG-3AG"/>
-                            <constraint firstAttribute="centerX" secondItem="eup-op-jPb" secondAttribute="centerX" id="fWQ-E4-0BP">
+                            <constraint firstAttribute="centerX" secondItem="eup-op-jPb" secondAttribute="centerX" id="KLP-uv-Uzq">
                                 <variation key="heightClass=compact" constant="150"/>
                             </constraint>
-                            <constraint firstItem="YBh-1u-EfZ" firstAttribute="top" secondItem="eup-op-jPb" secondAttribute="bottom" constant="77" id="hUn-8Q-ilb"/>
-                            <constraint firstAttribute="centerX" secondItem="Kw0-mv-AfO" secondAttribute="centerX" id="lPN-x0-Bg8">
-                                <variation key="heightClass=compact" constant="150"/>
-                            </constraint>
-                            <constraint firstItem="bv1-zn-Y2U" firstAttribute="top" secondItem="Sye-uR-Nnk" secondAttribute="bottom" constant="5" id="ppL-HB-j3K"/>
-                            <constraint firstItem="MxU-lK-zlp" firstAttribute="top" secondItem="YBh-1u-EfZ" secondAttribute="bottom" constant="14" id="tA0-G7-s9C"/>
+                            <constraint firstItem="eup-op-jPb" firstAttribute="top" secondItem="y2B-sp-g6f" secondAttribute="bottom" constant="75" id="ktW-0R-Ckk"/>
                         </constraints>
-                        <variation key="heightClass=compact">
-                            <mask key="constraints">
-                                <include reference="fWQ-E4-0BP"/>
-                            </mask>
-                        </variation>
-                        <variation key="widthClass=regular">
-                            <mask key="constraints">
-                                <include reference="fWQ-E4-0BP"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="8Kc-Ye-vrU"/>
                     <connections>
                         <outlet property="firstNameTextField" destination="Sye-uR-Nnk" id="Dnw-Oq-vNk"/>
+                        <outlet property="gitHubActivityIndicator" destination="2CV-RI-ZwQ" id="CCw-YZ-oqB"/>
+                        <outlet property="gitHubTextField" destination="mM7-Tv-9dj" id="3bL-r0-g7f"/>
+                        <outlet property="gitHubUserImage" destination="L1m-Ym-iUv" id="0nl-7F-han"/>
                         <outlet property="imageView" destination="eup-op-jPb" id="Z3r-6j-R79"/>
                         <outlet property="lastNameTextField" destination="bv1-zn-Y2U" id="d6S-61-ESf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hga-ru-tcT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1810.5" y="369"/>
+            <point key="canvasLocation" x="1810" y="369"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ef0-yy-Hv5">
@@ -260,6 +228,7 @@
     </scenes>
     <resources>
         <image name="empty-contact-icon.png" width="256" height="256"/>
+        <image name="gitHubDefaultImage.png" width="140" height="140"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ife-Vm-7lz"/>
