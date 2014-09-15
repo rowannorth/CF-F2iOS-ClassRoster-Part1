@@ -1,20 +1,27 @@
 //
-//  DetailViewController.swift
+//  AddPersonViewController.swift
 //  ClassRoster
 //
-//  Created by Rowan North on 8/12/14.
+//  Created by Rowan North on 9/10/14.
 //  Copyright (c) 2014 Rowan North. All rights reserved.
 //
 
 import UIKit
 
-class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+protocol NewPersonDelegate {
     
-    //MARK: - Connections & Variables
+    func appendNewPersonToArray(controller: AddPersonViewController, newAddedPerson: Person)
     
-    var peopleDestination: Person?
-    var imageDownloadQueue = NSOperationQueue()
+}
 
+class AddPersonViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+   
+    //MARK: - Connections & Variables
+
+    var newPerson = Person(firstName: "", lastName: "")
+    var delegate: NewPersonDelegate?
+    var imageDownloadQueue = NSOperationQueue()
+    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
@@ -23,68 +30,23 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     @IBOutlet weak var gitHubActivityIndicator: UIActivityIndicatorView!
     
     //MARK: - Life Cycle Methods
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Sets DetailViewController as the delegate for all Text Fields.
-        self.firstNameTextField.delegate = self
-        self.lastNameTextField.delegate = self
-        self.gitHubTextField.delegate = self
-        
-        // Checks to see if the Person object already has an image set to it and loads that image into the imageView if it does.
-        if self.peopleDestination?.image != nil {
-            
-            self.imageView.image = self.peopleDestination!.image
-            
-        } else {
-            
-            // Sets the default image of the imageView.
-            self.imageView!.image = UIImage (named: "empty-contact-icon")
-            
-        }
-        
-        // Sets the default image of the gitHubUserImage.
-        if self.gitHubUserImage.image == nil {
-            self.gitHubUserImage.image = UIImage(named: "gitHubDefaultImage")
-        }
-       
-        //Sets imageView to be rounded.
-        self.imageView.contentMode = UIViewContentMode.ScaleAspectFit
-        self.imageView.layer.cornerRadius = self.imageView.frame.size.width / 2
-        self.imageView.clipsToBounds = true
-        self.imageView.layer.masksToBounds = true
-        self.imageView.layer.borderWidth = 1.0
-        self.imageView.layer.borderColor = UIColor.blackColor().CGColor
-        
-    }
-    
-    /* 
-    Sets the text properties of the Text Fields to the corresponding text properties of the selected Person object.
-    Also sets the image property of the gitHubUserImage to the gitHubProfileImage of the selected Person object.
-    */
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.firstNameTextField.text = self.peopleDestination?.firstName
-        self.lastNameTextField.text  = self.peopleDestination?.lastName
-        self.gitHubTextField.text    = self.peopleDestination?.gitHubUserName
-        self.gitHubUserImage.image   = self.peopleDestination?.gitHubProfileImage
 
-    }
+        // Sets DetailViewController as the delegate for all Text Fields and sets default image for imageView.
+        self.firstNameTextField.delegate = self
+        self.lastNameTextField.delegate  = self
+        self.gitHubTextField.delegate    = self
+        self.imageView.image = UIImage(named: "empty-contact-icon")
     
-    /*
-    Sets the text property of the selected Person object to the corresponding text properties of the Text Fields
-    so that any changes made will be passed back when the view disappears.
-    Does the same for the selected person's gitHubProfileImage property.
-    */
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
+    }
+
+    // Hides default "Back" button in NavigationController in order to replace it with a custom "Cancel" button.
+    override func viewWillAppear(animated: Bool) {
         
-        self.peopleDestination?.firstName          = self.firstNameTextField.text
-        self.peopleDestination?.lastName           = self.lastNameTextField.text
-        self.peopleDestination?.gitHubUserName     = self.gitHubTextField.text
-        self.peopleDestination?.gitHubProfileImage = self.gitHubUserImage.image
+        self.navigationItem.hidesBackButton = true
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -93,15 +55,15 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     }
     
     //MARK: - Text Fields
-    
-    /*
+
+    /* 
     Offsets the view so that when the Text Fields are being edited the keyboard doesn't obstruct the view's content.
     There are known bugs to me that I've yet to fix such as it adjusting properly to landscape view and
     occasionally a weird interference with the hardware keyboard settings in the iOS simulator prevent the keyboard from popping
     up but the view is still offset, causing a gap of black on the bottom of the screen.
     */
     func textFieldDidBeginEditing(textField: UITextField) {
-
+        
         switch textField {
             
         case self.firstNameTextField:
@@ -117,8 +79,8 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
                 self.view.frame.origin.y = -162
             })
         default:
-            
             self.view.frame.origin.y = 0
+            
         }
         
     }
@@ -147,11 +109,10 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     }
     
     //MARK: - User Photo
-   
-    // Launches an ImagePickerController to allow user to choose a photo from the photos album.
+
+    // Launches an ImagePickerController to allow user to choose a photo from the photos album
     @IBAction func uploadPhotoButton(sender: AnyObject) {
         
-
         let imagePickerController = UIImagePickerController()
         
         imagePickerController.delegate = self
@@ -163,7 +124,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         
     }
     
-    /* 
+    /*
     Sets the selected photo from the ImagePickerController to image property of the imageView
     as well as the image property of the selected Person object from the Table View.
     */
@@ -172,26 +133,23 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
         var editedImage = info[UIImagePickerControllerOriginalImage] as UIImage
         
         self.imageView.image = editedImage
-        self.peopleDestination?.image = editedImage
+        self.newPerson.image = editedImage
         
         picker.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     // Dismisses ImagePickerController.
     func imagePickerControllerDidCancel(picker: UIImagePickerController!) {
-        
         picker.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     //MARK: - GitHub Profile Name & Photo
-    
+
     /*
     Button click launches an alert box with a text field that prompts the user to enter a GitHub username.
     Passes the entered text into the text property of the gitHubTextField property.
     Passes the entered text into the gitHubUserName property of the selected Person object.
-    Passes the entered text into the parameter of the getGitHubProfileImage function so it can pull the 
+    Passes the entered text into the parameter of the getGitHubProfileImage function so it can pull the
     user's profile image from the GitHub API.
     */
     @IBAction func gitHubButton(sender: AnyObject) {
@@ -203,14 +161,16 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             alertTextField = textField
         })
         enterGitHubInfo.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-        enterGitHubInfo.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default) { (UIAlertAction) -> Void in
+        enterGitHubInfo.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default) {
+            (UIAlertAction) -> Void in
             self.gitHubTextField.text = alertTextField.text
-            self.peopleDestination?.gitHubUserName = alertTextField.text
+            self.newPerson.gitHubUserName = alertTextField.text
             self.getGitHubProfileImage(alertTextField.text)
             })
         self.presentViewController(enterGitHubInfo, animated: true, completion: nil)
+        
     }
-    
+
     /*
     Passes in the String of a person's username into the URL for the GitHub API;
     A new queue is started along with an NSURL session that uses the GitHub API to fetch the URL value of the "avatar_url" key
@@ -223,7 +183,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
     ImageDownloadQueue stops and the task resumes.
     */
     func getGitHubProfileImage(searchUserName: String) -> Void {
-
+        
         self.gitHubActivityIndicator.startAnimating()
         let gitHubURL = NSURL(string: "https://api.github.com/users/\(searchUserName)")
         var profileImageURL = NSURL()
@@ -245,7 +205,7 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
                 var profileImagePhoto = UIImage(data: profileImageData)
                 NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                     self.gitHubUserImage.image = profileImagePhoto
-                    self.peopleDestination?.gitHubProfileImage = profileImagePhoto
+                    self.newPerson.gitHubProfileImage = profileImagePhoto
                     self.gitHubActivityIndicator.stopAnimating()
                     if self.gitHubUserImage.image == nil {
                         self.gitHubUserImage.image = UIImage(named: "gitHubDefaultImage")
@@ -260,17 +220,30 @@ class DetailViewController: UIViewController, UITextFieldDelegate, UIImagePicker
             })
             task.resume()
         }
-
+        
     }
     
-    /*
     // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
+
+    // Cancels adding a new student and pops back to root view controller without saving any changes.
+    @IBAction func cancelButton(sender: AnyObject) {
+        
+        self.navigationController?.popToRootViewControllerAnimated(true)
+        
     }
-    */
     
+    // Saves data of new Student object, appends to the array, and pops back to the root ViewController.
+    @IBAction func saveNewPersonButton(sender: AnyObject) {
+        
+        self.newPerson.firstName          = self.firstNameTextField.text
+        self.newPerson.lastName           = self.lastNameTextField.text
+        self.newPerson.gitHubUserName     = self.gitHubTextField.text
+        self.newPerson.gitHubProfileImage = self.gitHubUserImage.image
+        
+        self.delegate!.appendNewPersonToArray(self, newAddedPerson: newPerson)
+        
+        self.navigationController?.popToRootViewControllerAnimated(true)
+        
+    }
+
 }

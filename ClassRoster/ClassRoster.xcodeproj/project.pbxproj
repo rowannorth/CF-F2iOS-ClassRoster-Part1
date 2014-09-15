@@ -17,6 +17,7 @@
 		5846099619A58BF00005D989 /* empty-contact-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 5846099519A58BF00005D989 /* empty-contact-icon.png */; };
 		588FB68919B6A695002934AB /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F604911996EFBE00264224 /* Person.swift */; };
 		588FB68B19B7E2B4002934AB /* gitHubDefaultImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 588FB68A19B7E2B4002934AB /* gitHubDefaultImage.png */; };
+		588FB68F19C0EA76002934AB /* AddPersonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588FB68E19C0EA76002934AB /* AddPersonViewController.swift */; };
 		58F604921996EFBE00264224 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F604911996EFBE00264224 /* Person.swift */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		582285141996EBD00010897A /* ClassRosterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassRosterTests.swift; sourceTree = "<group>"; };
 		5846099519A58BF00005D989 /* empty-contact-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "empty-contact-icon.png"; path = "../../../../../Pictures/empty-contact-icon.png"; sourceTree = "<group>"; };
 		588FB68A19B7E2B4002934AB /* gitHubDefaultImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gitHubDefaultImage.png; path = ../../../../../Pictures/gitHubDefaultImage.png; sourceTree = "<group>"; };
+		588FB68E19C0EA76002934AB /* AddPersonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPersonViewController.swift; sourceTree = "<group>"; };
 		58F604911996EFBE00264224 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +92,7 @@
 				582285031996EBD00010897A /* ViewController.swift */,
 				582285051996EBD00010897A /* Main.storyboard */,
 				58216967199B212B00B74133 /* DetailViewController.swift */,
+				588FB68E19C0EA76002934AB /* AddPersonViewController.swift */,
 				588FB68A19B7E2B4002934AB /* gitHubDefaultImage.png */,
 				5846099519A58BF00005D989 /* empty-contact-icon.png */,
 				582285081996EBD00010897A /* Images.xcassets */,
@@ -232,6 +235,7 @@
 				58216968199B212B00B74133 /* DetailViewController.swift in Sources */,
 				58F604921996EFBE00264224 /* Person.swift in Sources */,
 				582285021996EBD00010897A /* ClassRoster.xcdatamodeld in Sources */,
+				588FB68F19C0EA76002934AB /* AddPersonViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

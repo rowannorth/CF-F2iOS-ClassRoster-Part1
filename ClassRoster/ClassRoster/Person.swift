@@ -22,7 +22,7 @@ class Person: NSObject, NSCoding {
         
         self.firstName = firstName
         self.lastName  = lastName
-        
+       
     }
     
     func fullName() -> String {
@@ -30,6 +30,8 @@ class Person: NSObject, NSCoding {
         return firstName + " " + lastName
         
     }
+    
+    //NSCoding for NSKeyedArchiver data persistence
     
     func encodeWithCoder(aCoder: NSCoder) {
         
@@ -48,6 +50,8 @@ class Person: NSObject, NSCoding {
             
         
     }
+    
+    //NSCoding for NSKeyedArchiver data persistence
     
     required init(coder aDecoder: NSCoder) {
         super.init()

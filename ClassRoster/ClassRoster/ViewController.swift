@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddPersonDelegate, DetailViewControllerDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, NewPersonDelegate {
+    
+    //MARK: - Connections & Variables
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -16,46 +18,43 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var teachers = [Person]()
     let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
     
-    let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-    
+
+    //MARK: - Life Cycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        // Sets the root ViewController as the delegate and datasource for the Table View.
         self.tableView.dataSource = self
         self.tableView.delegate   = self
         
+        // Checks to see if there is any data saved to disk and loads it if there is.
         if let students = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/studentarchive") as? [Person] {
             
             self.students = students
             
         } else {
             
+            // Generates students[] array the first time the app loads.
             self.createStudents()
             
         }
         
+        // Checks to see if there is any data saved to disk and loads it if there is.
         if let teachers = NSKeyedUnarchiver.unarchiveObjectWithFile(documentsPath + "/teacherarchive") as? [Person] {
             
             self.teachers = teachers
             
         } else {
             
+            // Generates teachers[] array the first time the app loads.
             self.createTeachers()
             
         }
         
     }
     
-    func addNewPerson(newPerson: Person) {
-        
-       
-        self.students.append(newPerson)
-//        self.teachers.append(newPerson)
-        
-    }
-    
+    // Refreshes the Table View and saves any changes that were made in another view.
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -64,11 +63,135 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    func saveChanges() {
-        NSKeyedArchiver.archiveRootObject(students, toFile: documentsPath + "/studentarchive")
-        NSKeyedArchiver.archiveRootObject(teachers, toFile: documentsPath + "/teacherarchive")
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
     
+    //MARK: - Table View
+    
+    //Hard codes the Table View to have 2 sections
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
+        return 2
+    }
+    
+    //Sets the number of Table View cells in each section to the count of the students[] and teachers[] arrays.
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if section == 0 {
+            return self.students.count
+        } else {
+            return self.teachers.count
+        }
+    }
+    
+    /* 
+    Generates a reusable Table View cell and sets the name based on the items in both students[] and
+    teachers[] arrays depending on the Table View section that is selected.
+    */
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
+        
+        if indexPath.section == 0 {
+        
+            var studentForRow = self.students[indexPath.row]
+            
+            cell.textLabel!.text = studentForRow.fullName()
+            
+        } else {
+        
+            var teacherForRow = self.teachers[indexPath.row]
+            
+            cell.textLabel!.text = teacherForRow.fullName()
+    
+        }
+        
+        cell.backgroundColor = UIColor.whiteColor()
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+
+    }
+    
+    // Deletes items in the Table View and saves any changes.
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
+        
+        if editingStyle == .Delete {
+
+            if indexPath.section == 0 {
+                self.students.removeAtIndex(indexPath!.row)
+                self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+
+            } else {
+                self.teachers.removeAtIndex(indexPath!.row)
+                self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+
+            }
+        }
+
+        self.tableView.reloadData()
+        self.saveChanges()
+    }
+    
+    // Sets title for each section of the Table View.
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String! {
+        
+        if section == 0 {
+            
+            return "Students"
+            
+        } else {
+            
+            return "Teachers"
+            
+        }
+    }
+    
+    //MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        
+        if segue.identifier == "showPeople" {
+            
+            if tableView.indexPathForSelectedRow()!.section == 0 {
+                
+                var peopleDestination = self.students[tableView.indexPathForSelectedRow()!.row]
+                
+                let studVC = segue.destinationViewController as DetailViewController
+                
+                studVC.peopleDestination = peopleDestination
+                
+            } else {
+                
+                var peopleDestination = self.teachers[tableView.indexPathForSelectedRow()!.row]
+                
+                let teachVC = segue.destinationViewController as DetailViewController
+                
+                teachVC.peopleDestination = peopleDestination
+                
+            }
+            
+            
+        } else if segue.identifier == "addPerson" {
+            
+        
+            let addVC = segue.destinationViewController as AddPersonViewController
+
+            addVC.delegate = self
+            
+            
+        } else {}
+        
+    }
+    
+    //MARK: - Custom Methods
+    
+    // Generates students[] array.
     func createStudents() {
         
         var nate = Person(firstName: "Nate", lastName: "Birkholz")
@@ -102,142 +225,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    // Generates teachers[] array.
     func createTeachers() {
         
         var john = Person(firstName: "John", lastName: "Clem")
         var brad = Person(firstName: "Brad", lastName: "Johnson")
-
+        
         self.teachers.append(john)
         self.teachers.append(brad)
         
     }
     
-    
-    func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+    // Adds newly created person object to students[] array.
+    func appendNewPersonToArray(controller: AddPersonViewController, newAddedPerson: Person) {
         
-        return 2
-    }
-    
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
         
-        if section == 0 {
-            return self.students.count
-        } else {
-            return self.teachers.count
-        }
-    }
-    
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+        self.students.append(newAddedPerson)
         
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as UITableViewCell
-        
-        if indexPath.section == 0 {
-        
-            var studentForRow = self.students[indexPath.row]
-            
-            cell.textLabel.text = studentForRow.fullName()
-            
-        } else {
-        
-            var teacherForRow = self.teachers[indexPath.row]
-            
-            cell.textLabel.text = teacherForRow.fullName()
-    
-        }
-        
-        cell.backgroundColor = UIColor.whiteColor()
-        
-        return cell
-    }
-    
-    func tableView(tableView: UITableView!, canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
-        return true
-
-    }
-    
-    
-    func tableView(tableView: UITableView!, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath!) {
-        
-        if editingStyle == .Delete {
-
-            if indexPath.section == 0 {
-                self.students.removeAtIndex(indexPath!.row)
-                self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-
-            } else {
-                self.teachers.removeAtIndex(indexPath!.row)
-                self.tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-
-            }
-     
-        }
-
         self.tableView.reloadData()
-        self.saveChanges()
-    }
-        
-    
-    
-    func tableView(tableView: UITableView!, titleForHeaderInSection section: Int) -> String! {
-        
-        if section == 0 {
-            
-            return "Students"
-            
-        } else {
-            
-            return "Teachers"
-            
-        }
     }
     
-    //MARK: UITableViewDelegate
-    
-    func tableView(tableView: UITableView!, didDeselectRowAtIndexPath indexPath: NSIndexPath!) {
-        
-        println(indexPath.item)
-        
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        
-        if segue.identifier == "showPeople" {
-            
-            if tableView.indexPathForSelectedRow().section == 0 {
-                
-                var peopleDestination = self.students[tableView.indexPathForSelectedRow().row]
-                
-                let studVC = segue.destinationViewController as DetailViewController
-                
-                studVC.peopleDestination = peopleDestination
-                
-            } else {
-                
-                var peopleDestination = self.teachers[tableView.indexPathForSelectedRow().row]
-                
-                let teachVC = segue.destinationViewController as DetailViewController
-                
-                teachVC.peopleDestination = peopleDestination
-                
-            }
-            
-            
-        } else if segue.identifier == "addPerson" {
-            
-            
-            
-            let addVC = segue.destinationViewController as DetailViewController
-        
-            addVC.delegate = self
-            
-        } else {}
-        
+    func saveChanges() {
+        NSKeyedArchiver.archiveRootObject(students, toFile: documentsPath + "/studentarchive")
+        NSKeyedArchiver.archiveRootObject(teachers, toFile: documentsPath + "/teacherarchive")
     }
     
 }
